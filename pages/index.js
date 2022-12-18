@@ -195,7 +195,7 @@ function Page({
                   width: '100%'
                 }}
               >
-                We are <Comma>{slackData.total_members_count}</Comma>{' '}
+                We are <Comma>{slackData.total_members_count}</Comma>{' '} hehe
                 <Text
                   sx={{
                     color: 'transparent',
