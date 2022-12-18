@@ -46,6 +46,7 @@ import ReactTooltip from 'react-tooltip'
 import Winter from '../components/index/cards/winter'
 import Comma from '../components/comma'
 import CarouselCards from '../components/index/carousel-cards'
+/** @jsxImportSource theme-ui */
 
 function Page({
   hackathonsData,
@@ -120,7 +121,7 @@ function Page({
         as={Head}
         title="Hack Club | Home for high school coders"
         description="Hack Club is a global nonprofit network of high school makers & student-led coding clubs where young people build the agency, the network, & the technical talent to think big & do big things in the world."
-        image="https://cloud-jbdkjynve-hack-club-bot.vercel.app/0og-image.png"
+        image="https://cloud-nqhrewrzc-hack-club-bot.vercel.app/0og-image-min.png"
       />
       <Head>
         <meta
@@ -228,7 +229,8 @@ function Page({
                   </Text>
                   teen hackers
                 </Text>
-                from around the world who code together
+                <br sx={{ display: ['inline', 'none', 'none'] }} /> from around
+                the world who code together
               </Text>
               <Button variant="ctaLg" as="a" href="/slack" mt={[3, 0, 0]}>
                 Join our community

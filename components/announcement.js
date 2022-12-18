@@ -21,7 +21,7 @@ const Announcement = ({
     variant="interactive"
     sx={{
       variant: 'cards.translucent',
-      // mx: 'auto',
+      mx: 'auto',
       maxWidth: 'narrow',
       width: '100%',
       textAlign: 'left',
@@ -50,7 +50,11 @@ const Announcement = ({
     )}
     <Text
       as="p"
-      sx={{ flex: '1 1 auto', strong: { display: ['inline', 'block'] } }}
+      sx={{
+        flex: '1 1 auto',
+        strong: { display: ['inline', 'block'] },
+        color: 'black'
+      }}
     >
       <strong>{copy}</strong>
       {caption && (

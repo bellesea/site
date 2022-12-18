@@ -14,7 +14,7 @@ import {
   Flex
 } from 'theme-ui'
 import Snowfall from 'react-snowfall'
-import Footer from '../components/footer'
+import WinterFooter from '../components/winter/footer'
 import FadeIn from '../components/fade-in'
 import { useState } from 'react'
 import ForceTheme from '../components/force-theme'
@@ -51,7 +51,7 @@ export function Winter() {
         <Snowfall />
         <ForceTheme theme="light" />
         {/* filter out rsvps that are "invalid" */}
-        <Landing rsvpCount={500 - rsvpCount} />
+        <Landing rsvpCount={rsvpCount} />
         <Breakdown />
         <Projects />
         <InfoGrid />
@@ -69,13 +69,14 @@ export function Winter() {
               You've RSVPed, what's next?
             </Heading>
             <Text as="p" sx={{ pb: 4, color: 'white', fontSize: [2, 3] }}>
-              Get a free DevKit (and gaming console 👀) by building a{' '}
+              Get a free hardware development kit by building a tile-based game
+              in
               <Link
                 href="https://github.com/hackclub/sprig#readme"
                 target="_blank"
                 sx={{ color: 'inherit' }}
               >
-                JavaScript game
+                Sprig
               </Link>
               . Or come hangout with us in #hardware-party on{' '}
               <Link target="_blank" href="/slack" sx={{ color: 'inherit' }}>
@@ -124,19 +125,8 @@ export function Winter() {
         {/* Timeline */}
 
         <Recap />
-        <Container
-          sx={{
-            margin: 'auto',
-            fontStyle: 'italic',
-            color: 'snow',
-            mb: 3,
-            textAlign: 'left'
-          }}
-        >
-          Illustrations by Ripley
-        </Container>
         {/* <Signup /> */}
-        <Footer />
+        <WinterFooter />
       </Box>
     </>
   )

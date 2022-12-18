@@ -94,7 +94,11 @@ function Step({ icon, name, duration, href }) {
             {duration}
           </Badge>
           <Text
-            sx={{ color: 'white', fontSize: [2, 3], maxWidth: [300, null, 550] }}
+            sx={{
+              color: 'white',
+              fontSize: [2, 3],
+              maxWidth: [300, null, 550]
+            }}
           >
             {name}
           </Text>
@@ -109,8 +113,8 @@ export default function RealTimeline() {
     <Flex sx={{ flexDirection: 'column', justifyContent: 'center', pb: 4 }}>
       <Step
         icon="post"
-        name="Instructions sent out on how to submit your hardware plan to qualify for the grant."
-        duration="When we reach 500 RSVPs"
+        name="Instructions will be sent out on how to submit your hardware plan to qualify for the grant."
+        duration="Now"
       />
       <Step
         icon="send"

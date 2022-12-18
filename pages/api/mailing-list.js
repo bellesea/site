@@ -11,7 +11,7 @@ export default async function submit(req, res) {
         api_key: process.env.POSTAL_API_KEY,
         name: data.name,
         email: data.email,
-        list: 'SUTgXFrqIRPE61eg08bC5Q',
+        list: process.env.POSTAL_LIST_ID,
         boolean: 'true'
       }).toString()
     }).then(r => r.text())
