@@ -18,19 +18,10 @@ const Content = () => (
         position: 'relative'
       }}
     >
-      <Container maxWidth={28} sx={{ mx: 0, py: 4 }}>
-        <Text variant="eyebrow">Hack Club Bank</Text>
+      <Container maxWidth={28} sx={{ mx: 0, pt: 4, pb: 2 }}>
+        <Text variant="eyebrow">HCB</Text>
         <br />
-        <Text
-          as="span"
-          variant="title"
-          sx={{
-            WebkitTextStroke: 'currentColor',
-            WebkitTextStrokeWidth: '2px',
-            WebkitTextFillColor: theme => theme.colors.white,
-            textShadow: theme => `0 0 12px ${theme.colors.red}`
-          }}
-        >
+        <Text as="span" variant="title">
           Grants, waived fees, and more!
         </Text>
       </Container>
@@ -38,22 +29,11 @@ const Content = () => (
         <ListItem
           knew
           icon="payment"
-          leadText={
-            <>
-              $500 grants (in partnership with <i>FIRST®</i>).
-            </>
-          }
+          leadText={<>$500 grants.</>}
           body={
             <>
-              Get a $500 grant* once you have a venue for your hackathon,
-              provided by Hack Club with the help of{' '}
-              <Link
-                href="https://www.firstinspires.org/"
-                sx={{ fontStyle: 'italic', color: 'white' }}
-              >
-                FIRST
-              </Link>
-              .
+              Running on HCB? Get a $500 grant once you have a venue, provided
+              by Hack Club.
               <NextLink href="/hackathons/grant">
                 <Link sx={{ ml: 2, cursor: 'pointer' }}>Learn more &rarr;</Link>
               </NextLink>
@@ -65,38 +45,26 @@ const Content = () => (
           icon="bolt"
           leadText="All fees waived."
           body={`
-          This semester, run your hackathon on Hack Club Bank for free. All the money you raise goes 
+          Run your hackathon on HCB for free. All the money you raise goes 
           directly towards your hackathon.`}
         />
         <ListItem
           icon="rep"
           leadText="A suite of free tools."
           body={`
-          When you join Hack Club Bank, you'll have access to a suite of free tools including
-          debit cards, a domain name, Google Workspace, stickers, and more.`}
+          When you join HCB, you'll have access to a suite of free tools including
+          debit cards, a domain name, stickers, and more.`}
         />
       </List>
-      <NextLink href="/bank" passHref>
+      <NextLink href="/fiscal-sponsorship" passHref>
         <Button as="a" variant="outlineLg" sx={{ width: [null, null, 500] }}>
           Apply&nbsp;
           <Box as="span" sx={{ display: ['none', 'inline', ''] }}>
-            for Hack Club Bank
+            for HCB
           </Box>{' '}
           →
         </Button>
       </NextLink>
-      <Text
-        variant="small"
-        sx={{
-          display: ['none', 'inline', ''],
-          marginTop: 2,
-          width: [null, null, 500],
-          textAlign: 'center',
-          opacity: 0.8
-        }}
-      >
-        * Open to hackathons that are able to run on Hack Club Bank.
-      </Text>
     </Container>
   </>
 )
@@ -185,7 +153,7 @@ const Static = () => (
     sx={{
       position: 'relative',
       overflow: 'hidden',
-      backgroundImage: `url('/bank/bg.webp')`,
+      backgroundImage: `url('/fiscal-sponsorship/bg.webp')`,
       backgroundSize: 'cover'
     }}
   >

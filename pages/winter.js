@@ -37,7 +37,7 @@ export function Winter() {
 
   const rsvpCount = rsvps
     ? rsvps.filter(rsvp => rsvp.fields.Status === 'rsvp').length
-    : 100 // arbitrary fallback number
+    : 1000 // arbitrary fallback number
   return (
     <>
       <Box as="main" sx={{ bg: 'blue' }}>
@@ -70,7 +70,7 @@ export function Winter() {
             </Heading>
             <Text as="p" sx={{ pb: 4, color: 'white', fontSize: [2, 3] }}>
               Get a free hardware development kit by building a tile-based game
-              in
+              in{' '}
               <Link
                 href="https://github.com/hackclub/sprig#readme"
                 target="_blank"
@@ -122,10 +122,9 @@ export function Winter() {
             <RealTimeline />
           </Flex>
         </Container>
-        {/* Timeline */}
-
-        <Recap />
-        {/* <Signup /> */}
+        <Box id="demo-account">
+          <Recap />
+        </Box>
         <WinterFooter />
       </Box>
     </>

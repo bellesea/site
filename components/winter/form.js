@@ -88,12 +88,12 @@ export default function Signup() {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    await fetch('/api/bank/demo', {
+    await fetch('/api/fiscal-sponsorship/demo', {
       method: 'POST',
       body: JSON.stringify({
         eventName,
         userEmail,
-        category: 'hardware grant'
+        eventCategory: 'hardware grant'
       })
     })
 
@@ -109,7 +109,7 @@ export default function Signup() {
       <Base
         id="form"
         method="POST"
-        action="/api/bank/demo"
+        action="/api/fiscal-sponsorship/demo"
         onSubmit={handleSubmit}
       >
         <Field

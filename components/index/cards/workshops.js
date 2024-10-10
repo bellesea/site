@@ -1,17 +1,5 @@
 import CardModel from './card-model'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
+import { Box, Card, Flex, Grid, Heading, Image, Text } from 'theme-ui'
 import { useState } from 'react'
 import Buttons from './button'
 
@@ -28,7 +16,6 @@ const WorkshopCard = ({
 }) => (
   <Card
     href={`https://workshops.hackclub.com/${slug}`}
-    passHref
     as="a"
     variant="interactive"
     target="_blank"
@@ -44,12 +31,13 @@ const WorkshopCard = ({
       '& span': {
         lineHeight: 1.25
       },
-      maxWidth: '250px'
+      maxWidth: '250px',
+      height: '250px'
     }}
     {...props}
   >
     <Box sx={{ p: 3, lineHeight: 'body' }}>
-      <Heading as="h3" sx={{ my: 1 }}>
+      <Heading as="h4" sx={{ my: 1 }}>
         {name}
       </Heading>
       <Text variant="caption">{description}</Text>
@@ -76,17 +64,18 @@ export default function Workshops({ data, stars }) {
       sx={{
         backgroundColor: 'elevated',
         background:
-          'linear-gradient(32deg, rgba(51, 142, 218, 0.9) 0%, rgba(51, 214, 166, 0.9) 100%)'
+          'linear-gradient(32deg, rgba(51, 142, 218, 0.9) 0%, rgba(51, 214, 166, 0.9) 100%)',
+        height: 'fit-content'
       }}
       github_link="https://github.com/hackclub/workshops"
       stars={stars}
       highlight="blue"
     >
-      <Text variant="title" sx={{ fontSize: ['36px', 4, 5] }}>
+      <Text variant="title" as="h3" sx={{ fontSize: ['36px', 4, 5] }}>
         Workshops
       </Text>
-      <Grid columns={[1, 2, 2]}>
-        <Flex sx={{ flexDirection: 'column' }}>
+      <Grid columns={[1, 2, 2]} sx={{ gap: 4, height: 'fit-content' }}>
+        <Flex sx={{ flexDirection: 'column', height: 'fit-content' }}>
           <Text as="p" variant="subtitle">
             100+ community-contributed, self-guided coding tutorials and ideas.
             Learn to code by building, one project at a time.
@@ -98,7 +87,7 @@ export default function Workshops({ data, stars }) {
             primary="white"
             sx={{ color: 'blue', mt: [3, 3, 4] }}
           >
-            Browse a workshop
+            Browse The Workshops
           </Buttons>
           <Buttons
             // content="click to learn more about how to submit a workshop"
@@ -106,13 +95,10 @@ export default function Workshops({ data, stars }) {
             link="https://workshops.hackclub.com/submit-a-workshop/"
             icon="event-add"
           >
-            Build a workshop
+            Build A Workshop
           </Buttons>
         </Flex>
-        <Grid
-          sx={{ display: ['none', 'grid', 'grid'], gap: 3 }}
-          columns={[1, 1, 1, 2]}
-        >
+        <Grid sx={{ display: ['none', 'grid', 'grid'] }} columns={[1, 1, 1, 2]}>
           <WorkshopCard
             key="splatter_paint"
             slug="splatter_paint"

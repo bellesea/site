@@ -41,8 +41,8 @@ const Page = () => (
     <Meta
       as={Head}
       title="Hack Night"
-      description="Every Saturday night, the Hack Club community gathers on Slack Huddles to show off what we’re working on & hang out."
-      image="https://cloud-9h1w4lj4d.vercel.app/2020-07-25_52g0nw40p2b00dh39mt93xq5ubku6yaj.jpeg"
+      description="The Hack Club community regularly gathers on Slack Huddles and Zoom calls to show off what we’re working on & hang out."
+      image="https://cloud-r4rrjh2z8-hack-club-bot.vercel.app/52020-07-25_52g0nw40p2b00dh39mt93xq5ubku6yaj.jpeg"
     />
     <Nav color={color} dark />
     <Box
@@ -54,7 +54,7 @@ const Page = () => (
         color: 'muted',
         textAlign: 'center',
         backgroundImage:
-          'url(https://cloud-8j1jfvspm.vercel.app/2020-07-24_stars.svg)',
+          'url(https://cloud-r4rrjh2z8-hack-club-bot.vercel.app/62020-07-24_stars.svg)',
         backgroundSize: '512px auto'
       }}
     >
@@ -69,7 +69,7 @@ const Page = () => (
           height: '100%',
           display: 'block',
           background:
-            'transparent url(https://cloud-c5tvihg15.vercel.app/2020-07-24_afnkcwju2hfkbrkc1ee0h5a5y72a2r5f.png) repeat top center',
+            'transparent url(https://cloud-r4rrjh2z8-hack-club-bot.vercel.app/72020-07-24_afnkcwju2hfkbrkc1ee0h5a5y72a2r5f.png) repeat top center',
           animation: `${twinkling} 200s linear infinite`
         }}
       ></Box>
@@ -94,12 +94,13 @@ const Page = () => (
           Hack Night
         </Heading>
         <Text as="p" variant="subtitle">
-          Every Saturday, the Hack Club community gathers on Zoom. It’s a chance
-          to meet new friends, livestream what you’re hacking on, or just hang
-          out on a chill call.
+          The Hack Club community regularly gathers on Zoom or Huddles. It’s a
+          chance to meet new friends, livestream what you’re hacking on, or just
+          hang out on a chill call.
         </Text>
         <Text as="p" variant="subtitle">
-          Join in Saturday at 8:30 PM ET on{' '}
+          Hack nights are hosted regularly by Hack Clubbers. Come join or start
+          an impromptu Hack session on{' '}
           <NextLink href="/slack" passHref>
             <Link sx={{ color, opacity: 0.75 }}>#hack-night</Link>
           </NextLink>
@@ -125,12 +126,12 @@ const Page = () => (
         }}
       >
         <Image
-          src="https://cloud-2oi5yv0i8.vercel.app/2020-07-24_gbetd0kafcxjp2e5hkv4w9u3m40pmmmt.png"
+          src="https://cloud-r4rrjh2z8-hack-club-bot.vercel.app/82020-07-24_gbetd0kafcxjp2e5hkv4w9u3m40pmmmt.png"
           alt="Moon background"
           width={512}
         />
         <Image
-          src="https://cloud-9pj8ga86m.vercel.app/2020-07-24_zdd8ycnkp9q0bbf1fj8a1amjv3zndufz.png"
+          src="https://cloud-r4rrjh2z8-hack-club-bot.vercel.app/92020-07-24_zdd8ycnkp9q0bbf1fj8a1amjv3zndufz.png"
           alt="Illustration of Orpheus with a moon"
           width={512}
           sx={{

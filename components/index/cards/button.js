@@ -1,19 +1,7 @@
-import React, { useState } from 'react'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
-import ReactTooltip from 'react-tooltip'
+import React from 'react'
+import { Box, Button, Text } from 'theme-ui'
+import ReactTooltip from '../../react-tooltip'
 import Icon from '@hackclub/icons'
-/** @jsxImportSource theme-ui */
 
 export default function Buttons({
   children,
@@ -22,35 +10,39 @@ export default function Buttons({
   content,
   link,
   primary,
+  overrideColor,
   ...props
 }) {
-  let fontWeight = primary != null ? '700' : '400'
+  let fontWeight = primary ? '700' : '400'
 
   return (
-    <Box py={1}>
+    <Box
+      as="button"
+      sx={{ background: 'transparent', border: 'none', color: 'white' }}
+      py={1}
+    >
       <Button
         data-place="right"
         data-for={id}
         data-effect="solid"
         data-tip
         sx={{
-          background: primary || 'rgb(255, 255, 255, 0.3)',
+          background: primary || overrideColor || 'rgb(255, 255, 255, 0.3)',
           borderRadius: '100px',
           border: 'none',
           display: 'flex',
           alignItems: 'center',
           color: 'inherit',
           px: '3',
-          py: primary != null ? '5px' : 1,
+          py: primary ? '12px' : 2,
           width: 'fit-content',
           textTransform: 'none',
           fontWeight: '400',
-          fontSize:
-            primary != null ? ['18px', '20px', '22px'] : [1, '16px', '18px'],
+          fontSize: primary ? ['18px', '20px', '22px'] : [1, '16px', '18px'],
           backdropFilter: 'blur(2px)',
           fontWeight: fontWeight
         }}
-        as={'a'}
+        as="a"
         href={link || '/'}
         target="_blank"
         rel="noreferrer"
@@ -77,7 +69,7 @@ export default function Buttons({
         }}
         className="custom-tooltip-radius custom-arrow-radius"
         arrowRadius="2"
-        tooltipRadius="4"
+        tooltipRadius="10"
       >
         {content}
       </ReactTooltip>

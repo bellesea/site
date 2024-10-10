@@ -1,20 +1,7 @@
 import React, { useState } from 'react'
 import Buttons from './button'
 import CardModel from './card-model'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Grid,
-  Flex,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
-import ReactTooltip from 'react-tooltip'
+import { Box, Grid, Flex, Image, Text } from 'theme-ui'
 
 /** @jsxImportSource theme-ui */
 
@@ -27,7 +14,7 @@ const Cover = () => (
       left: 0,
       right: 0,
       backgroundImage:
-        'linear-gradient(to bottom,rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5))',
+        'linear-gradient(to bottom,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))',
       opacity: 0.8,
       zIndex: 1
     }}
@@ -46,7 +33,8 @@ export default function Clubs() {
       }}
     >
       <Image
-        src="/home/clubs-bg.webp"
+        src="https://cloud-5pdwvchgm-hack-club-bot.vercel.app/05851864a.jpg"
+        alt="Summer Creek Hack Club meeting, February 2020"
         sx={{
           objectFit: 'cover',
           position: 'absolute',
@@ -60,19 +48,19 @@ export default function Clubs() {
       <Cover />
       <Text
         variant="title"
+        as="h3"
         sx={{
           borderRadius: 'default',
           px: 2,
           mx: [-2, 0],
           whiteSpace: [null, 'nowrap', 'nowrap'],
-          color: ['white', 'red', 'red'],
-          bg: ['transparent', 'white', 'white'],
           fontSize: ['36px', 4, 5],
           position: 'relative',
-          zIndex: 2
+          zIndex: 2,
+          width: 'fit-content'
         }}
       >
-        Network of 400+ coding clubs
+        A Network of 400+ Coding Clubs
       </Text>
       <Grid columns={[1, 1, 2]} sx={{ position: 'relative', zIndex: 2 }}>
         <Box>
@@ -81,9 +69,9 @@ export default function Clubs() {
             variant="subtitle"
             sx={{ textShadow: '1px 1px 5px black' }}
           >
-            Join or start a Hack Club and be part of a network of high quality
-            coding clubs where you learn to code entirely through building
-            things.
+            Join or start a Hack&nbsp;Club and be part of a network of high
+            quality coding clubs where you learn to code entirely through
+            building things.
           </Text>
           <Text
             as="p"
@@ -103,14 +91,6 @@ export default function Clubs() {
             >
               Start a club
             </Buttons>
-            {/* <Buttons
-              content="click for our clubs map and reach out to team@hackclub.com to be connected"
-              id="1"
-              icon="rep"
-              link="/map"
-            >
-              Join a Hack Club near you
-            </Buttons> */}
           </Flex>
         </Box>
       </Grid>

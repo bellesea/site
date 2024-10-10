@@ -1,26 +1,11 @@
-import CardModel from './card-model'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
-import Buttons from './button'
-import Dot from '../../dot'
-/** @jsxImportSource theme-ui */
+import { Box, Flex, Grid, Image, Link, Text } from 'theme-ui'
 import { useEffect, useState } from 'react'
+import Buttons from './button'
+import CardModel from './card-model'
 
 export default function Epoch() {
   const calculateTimeLeft = () => {
-    const difference = +new Date(`2022-12-30T23:00:00.000Z`) - +new Date()
-
+    const difference = +new Date(`2022-12-30T12:30:00.000Z`) - +new Date()
     let timeLeft = {}
 
     if (difference > 0) {
@@ -49,13 +34,13 @@ export default function Epoch() {
 
   Object.keys(timeLeft).forEach(e => {
     if (!timeLeft[e]) {
-      if (e == 'days') {
+      if (e === 'days') {
         return
-      } else if (e == 'hours') {
+      } else if (e === 'hours') {
         if (!timeLeft['days']) {
           return
         }
-      } else if (e == 'min') {
+      } else if (e === 'min') {
         if (!timeLeft['days'] && !timeLeft['hours']) {
           return
         }
@@ -68,19 +53,19 @@ export default function Epoch() {
 
     var name = ''
 
-    if (e == 'days') {
-      if (timeLeft[e] == 1 || timeLeft[e] == 0) {
+    if (e === 'days') {
+      if (timeLeft[e] === 1 || timeLeft[e] === 0) {
         name = 'day'
       } else {
         name = 'days'
       }
-    } else if (e == 'hours') {
-      if (timeLeft[e] == 1 || timeLeft[e] == 0) {
+    } else if (e === 'hours') {
+      if (timeLeft[e] === 1 || timeLeft[e] === 0) {
         name = 'hour'
       } else {
         name = 'hours'
       }
-    } else if (e == 'min') {
+    } else if (e === 'min') {
       name = 'min'
     } else {
       name = 'sec'
@@ -144,16 +129,18 @@ export default function Epoch() {
           ml: ['-24px', '-32px', '-32px', '-32px'],
           mt: ['-24px', '-32px', '-32px', '-32px']
         }}
+        alt="Hack Club Presents Epoch background"
       />
       <Grid columns={[1, 1, '1fr 1.5fr']} sx={{ position: 'relative' }}>
         <Box>
-          <img
+          <Image
             src="https://cloud-jzsq7jfvg-hack-club-bot.vercel.app/0group_9.png"
             sx={{
               width: ['220px', '220px', '240px', '350px'],
               position: 'relative',
               zIndex: 2
             }}
+            alt="Hack Club Presents Epoch header"
           />
           <Box>
             {timer.length ? (

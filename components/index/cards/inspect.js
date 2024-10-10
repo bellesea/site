@@ -1,16 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
+import { Text } from 'theme-ui'
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import usePrefersMotion from '../lib/use-prefers-motion'

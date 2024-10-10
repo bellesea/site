@@ -5,7 +5,7 @@ import NextLink from 'next/link'
 import theme from '@hackclub/theme'
 import Icon from './icon'
 
-const Base = styled(Box)`
+const Base = styled(Box, { shouldForwardProp: prop => prop !== 'dark' })`
   background: ${props =>
     props.dark
       ? `${theme.colors.darker} radial-gradient(${theme.colors.black} 1px, transparent 1px)`
@@ -40,7 +40,7 @@ const Logo = props => (
 const Service = ({ href, icon, name = '', ...props }) => (
   <Link
     target="_blank"
-    rel="noopener"
+    rel="noopener me"
     href={href}
     title={`Hack Club on ${name ? name : icon}`}
     {...props}
@@ -49,7 +49,12 @@ const Service = ({ href, icon, name = '', ...props }) => (
   </Link>
 )
 
-const Footer = ({ dark = false, children, ...props }) => (
+const Footer = ({
+  dark = false,
+  email = 'team@hackclub.com',
+  children,
+  ...props
+}) => (
   <Base
     color={dark ? 'muted' : 'slate'}
     py={[4, 5]}
@@ -59,7 +64,7 @@ const Footer = ({ dark = false, children, ...props }) => (
     {...props}
   >
     <Container px={[3, null, 4]}>
-    {children}
+      {children}
       <Grid
         as="article"
         gap={[2, 4]}
@@ -70,7 +75,7 @@ const Footer = ({ dark = false, children, ...props }) => (
             textDecoration: 'none',
             color: 'muted',
             transition: '0.125s color ease-in-out',
-            ':hover,:focus': { color: 'slate' }
+            ':hover,:focus': { color: 'slate', textDecoration: 'underline' }
           },
           '> div > a': {
             display: 'block',
@@ -83,13 +88,13 @@ const Footer = ({ dark = false, children, ...props }) => (
       >
         <Box>
           <Heading as="h2" variant="subheadline" mb={3}>
-            Hack Club
+            Hack&nbsp;Club
           </Heading>
           <NextLink href="/philosophy" passHref>
             <Link>Philosophy</Link>
           </NextLink>
           <NextLink href="/team" passHref>
-            <Link>Team</Link>
+            <Link>Our Team & Board</Link>
           </NextLink>
           <NextLink href="/jobs" passHref>
             <Link>Jobs</Link>
@@ -108,9 +113,11 @@ const Footer = ({ dark = false, children, ...props }) => (
           <Heading as="h2" variant="subheadline" mb={3}>
             Resources
           </Heading>
+          <Link href="https://hackclub.com/pizza">Clubs Pizza Grant</Link>
           <Link href="https://events.hackclub.com/">Community Events</Link>
+          <Link href="https://jams.hackclub.com/">Jams</Link>
           <Link href="https://toolbox.hackclub.com/">Toolbox</Link>
-          <Link href="https://hackclub.com/map">Clubs Map</Link>
+          <Link href="https://directory.hackclub.com/">Clubs Directory</Link>
           <Link href="https://hackclub.com/conduct/">Code of Conduct</Link>
         </Box>
         <Box sx={{ gridColumn: ['span 2', 'span 1'] }}>
@@ -130,7 +137,8 @@ const Footer = ({ dark = false, children, ...props }) => (
                 transition:
                   'transform .125s ease-in-out, color .125s ease-in-out',
                 ':hover,:focus': { transform: 'scale(1.125)' }
-              }
+              },
+              placeItems: 'center'
             }}
           >
             <Service
@@ -151,13 +159,13 @@ const Footer = ({ dark = false, children, ...props }) => (
             />
             <Service
               href="https://figma.com/@hackclub"
-              icon="figma"
+              icon="figma-fill"
               name="Figma"
             />
             <Service
-              href="https://www.facebook.com/Hack-Club-741805665870458"
-              icon="facebook"
-              name="Facebook"
+              href="https://social.dino.icu/@hackclub"
+              icon="mastodon"
+              name="Mastodon"
             />
             <Service
               href="https://www.youtube.com/c/HackClubHQ"
@@ -169,7 +177,7 @@ const Footer = ({ dark = false, children, ...props }) => (
               icon="instagram"
               name="Instagram"
             />
-            <Service href="mailto:team@hackclub.com" icon="email" />
+            <Service href={`mailto:${email}`} icon="email-fill" name="Email" />
           </Grid>
           <Text my={2}>
             <Link href="tel:1-855-625-HACK">1-855-625-HACK</Link>
@@ -181,7 +189,7 @@ const Footer = ({ dark = false, children, ...props }) => (
         </Box>
       </Grid>
       <Text as="p" variant="caption" sx={{ mt: 3 }}>
-        © {new Date().getFullYear()} Hack Club. 501(c)(3) nonprofit (EIN:
+        © {new Date().getFullYear()} Hack&nbsp;Club. 501(c)(3) nonprofit (EIN:
         81-2908499)
       </Text>
     </Container>

@@ -1,20 +1,7 @@
-import Tilt from './tilt'
 import Icon from '../../icon'
-import {
-  Box,
-  Button,
-  Card,
-  Flex,
-  Container,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
+import { Box, Card, Flex, Image, Link, Text } from 'theme-ui'
 import { Zoom } from 'react-reveal'
-import ReactTooltip from 'react-tooltip'
+import ReactTooltip from '../../react-tooltip'
 import Comma from '../../comma'
 
 /** @jsxImportSource theme-ui */
@@ -22,6 +9,7 @@ import Comma from '../../comma'
 const CardModel = ({
   background,
   children,
+  image,
   link,
   highlight,
   github_link,
@@ -31,6 +19,7 @@ const CardModel = ({
   stars,
   delay,
   position,
+  filter,
   ...props
 }) => (
   // <Zoom delay={delay}>
@@ -39,7 +28,7 @@ const CardModel = ({
       position: 'relative',
       width: '100%',
       color: color,
-      my: [4, 5],
+      my: [4, 4],
       p: '24px',
       backgroundSize: 'cover',
       backgroundImage: `url(${background})` || '',
@@ -56,25 +45,26 @@ const CardModel = ({
         sx={{
           position: ['relative', 'relative', 'relative', 'absolute'],
           width: 'fit-content',
-          // float: 'right',
           right: [0, 0, 0, 3],
           top: [0, 0, 0, 3],
           zIndex: 3,
-          px: 3,
-          py: 2,
+          px: '12px',
+          py: '4px',
           mb: 2,
           float: [null, 'right', null],
-          background: 'rgba(255,255,255,0.2)',
-          borderRadius: 'extra',
+          // background: 'rgba(255,255,255,0.2)',
+          border: 'rgba(255,255,255,0.2) dashed 1px',
+          borderRadius: 'circle',
           fontWeight: 'bold'
         }}
       >
         {text || 'Happening now'}
       </Box>
     )}
-    {github_link != null ? (
+
+    {github_link && (
       <Box>
-        {position == 'bottom' ? (
+        {position === 'bottom' ? (
           <Flex
             sx={{
               position: 'absolute',
@@ -102,7 +92,7 @@ const CardModel = ({
                 }}
               />
             </Link>
-            {stars != null ? (
+            {stars ? (
               <Text as="h2">
                 ⭐️ <Comma>{stars}</Comma>
               </Text>
@@ -121,7 +111,7 @@ const CardModel = ({
               // flexDirection: ['column', 'row', 'row']
             }}
           >
-            {stars != null ? (
+            {stars ? (
               <Text as="h2" sx={{ fontSize: ['20px', '24px', '28px'] }}>
                 ⭐️ <Comma>{stars}</Comma>
               </Text>
@@ -144,8 +134,24 @@ const CardModel = ({
           </Flex>
         )}
       </Box>
-    ) : (
-      <></>
+    )}
+
+    {image && (
+      <Image
+        src={image}
+        draggable="false"
+        sx={{
+          objectFit: 'cover',
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          ml: ['-24px', '-32px', '-32px', '-32px'],
+          mt: ['-24px', '-32px', '-32px', '-32px'],
+          zIndex: 0,
+          filter
+        }}
+        alt=""
+      />
     )}
     {children}
     <ReactTooltip />

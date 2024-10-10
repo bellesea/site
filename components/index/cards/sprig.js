@@ -1,17 +1,5 @@
 import CardModel from './card-model'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
+import { Box, Flex, Grid, Image, Link, Text } from 'theme-ui'
 import Buttons from './button'
 import styled from '@emotion/styled'
 import RelativeTime from 'react-relative-time'
@@ -46,7 +34,7 @@ function Game({ game, gameImage, gameImage1, ...props }) {
     >
       <Box
         as="a"
-        href={`https://editor.sprig.hackclub.com/?file=https://raw.githubusercontent.com/hackclub/sprig/main/games/${game.filename}.js`}
+        href={`https://editor.sprig.hackclub.com/?file=https://raw.githubusercontent.com/hackclub/sprig/main/games/${game?.filename}.js`}
         target="_blank"
         rel="noopener noreferrer"
         sx={{
@@ -141,10 +129,10 @@ function Game({ game, gameImage, gameImage1, ...props }) {
               lineHeight: '1.4rem'
             }}
           >
-            {game.title}
+            {game?.title}
           </Text>
           <Text
-            as="span"
+            as="h4"
             sx={{
               fontWeight: '300',
               fontSize: '1.1rem',
@@ -158,7 +146,7 @@ function Game({ game, gameImage, gameImage1, ...props }) {
               lineHeight: '1rem'
             }}
           >
-            by {game.author}
+            by {game?.author}
           </Text>
           <Text
             as="span"
@@ -171,7 +159,7 @@ function Game({ game, gameImage, gameImage1, ...props }) {
               mb: 1
             }}
           >
-            <RelativeTime value={game.addedOn} titleFormat="YYYY-MM-DD" />
+            <RelativeTime value={game['addedOn']} titleFormat="YYYY-MM-DD" />
           </Text>
         </Box>
       </Box>
@@ -184,30 +172,21 @@ export default function Sprig({ stars, game, gameImage, gameImage1 }) {
     <CardModel
       github_link="https://github.com/hackclub/sprig/"
       color="white"
-      // background="https://sprig.hackclub.com/background.jpg"
       stars={stars}
       highlight="#FFDE4D"
       sx={{ backgroundColor: '#0C0C16' }}
+      image="/home/sprig-bg.webp"
     >
-      <Image
-        src="/home/sprig-bg.webp"
-        sx={{
-          objectFit: 'cover',
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          ml: ['-24px', '-32px', '-32px', '-32px'],
-          mt: ['-24px', '-32px', '-32px', '-32px'],
-          zIndex: 0
-        }}
-      />
       <Image
         src="/home/sprig-logo.webp"
         sx={{
           width: ['150px', '180px', '220px'],
           zIndex: 3,
-          position: 'relative'
+          position: 'relative',
+          fontSize: ['36px', 4, 5],
+          color: 'white'
         }}
+        alt="Sprig"
       />
       <Grid columns={[1, 2]}>
         <Box>
@@ -278,7 +257,7 @@ export default function Sprig({ stars, game, gameImage, gameImage1 }) {
           >
             <Game
               game={game[0]}
-              // gameImage={gameImage}
+            // gameImage={gameImage}
             />
             <Game
               game={game[1]}

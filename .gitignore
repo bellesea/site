@@ -6,3 +6,8 @@ node_modules
 public/sitemap.xml
 .vercel
 .vscode
+yarn-error.log
+bun.lockb
+.idea
+.yarn
+.yarnrc.yml

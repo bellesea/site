@@ -124,7 +124,7 @@ const Cards = ({ avatar, username, description, image }) => {
       <Flex
         as="a"
         href={
-          username != 'cjmika110'
+          username !== 'cjmika110'
             ? `https://scrapbook.hackclub.com/${username}`
             : 'https://scrapbook.hackclub.com'
         }
@@ -180,15 +180,15 @@ export default function Projects() {
   const [count, setCount] = useState(0)
 
   let list = [
-    'mechanical keyboard',
-    '3D printer',
+    'drawing robot',
     'drone',
     'CNC machine',
     'pixel art display',
-    'camera'
+    'camera',
+    '3D printer'
   ]
 
-  if (count == list.length - 1) {
+  if (count === list.length - 1) {
     setCount(0)
   }
 

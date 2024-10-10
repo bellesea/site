@@ -50,7 +50,7 @@ export const BankProject = ({ name, url }) => (
   </Card>
 )
 
-const Page = ({ repos }) => (
+const Page = ({ repos, transparentAccounts }) => (
   <>
     <Meta
       as={Head}
@@ -71,7 +71,11 @@ const Page = ({ repos }) => (
       }}
     >
       <Container variant="copy">
-        <Heading as="h1" variant="title" sx={{ color: 'primary', mt: [2, 4] }}>
+        <Heading
+          as="h1"
+          variant="title"
+          sx={{ color: 'primary', mt: [2.5, 4] }}
+        >
           Open Source at Hack Club
         </Heading>
         <Heading as="h2" variant="subtitle" sx={{ mt: 3, color: 'text' }}>
@@ -84,7 +88,7 @@ const Page = ({ repos }) => (
           mt={3}
           href="https://contribute.hackclub.com"
         >
-          Our Guide to Contributing
+          Contribute to Our Projects
         </Button>
       </Container>
     </Box>
@@ -102,41 +106,16 @@ const Page = ({ repos }) => (
         Finances
       </Heading>
       <Text sx={{ fontSize: 2, color: 'placeholder' }}>
-        All open sourced through Hack Club Bank Transparency Mode.
+        All open sourced through HCB Transparency Mode.
       </Text>
       <Grid columns={2} gap={3} mt={2} mb={[4]}>
-        <BankProject name="HQ" url={`https://bank.hackclub.com/hq/`} />
-        <BankProject
-          name="Endowment"
-          url={`https://bank.hackclub.com/endowment`}
-        />
-        <BankProject
-          name="Discretionary Fund"
-          url={`https://bank.hackclub.com/discretionary-fund`}
-        />
-        <BankProject
-          name="Summer of Making"
-          desc={`Our 2020 Summer Program`}
-          url="https://bank.hackclub.com/summer-of-making"
-        />
-        <BankProject
-          name="Summer of Making Stickers"
-          url="https://bank.hackclub.com/som-sticker-shipments"
-        />
-        <BankProject
-          name="The Hacker Zephyr"
-          url={`https://bank.hackclub.com/zephyr`}
-        />
-        <BankProject
-          name="Community Team"
-          url="https://bank.hackclub.com/community-team"
-        />
-        <BankProject
-          name="Wild Wild West"
-          url="https://bank.hackclub.com/wild-wild-west"
-        />
-        <BankProject name="Assemble" url="https://bank.hackclub.com/assemble" />
-        <BankProject name="Epoch" url="https://bank.hackclub.com/epoch" />
+        {transparentAccounts.map(account => (
+          <BankProject
+            key={account.id}
+            name={account.name}
+            url={`https://hcb.hackclub.com/${account.slug}`}
+          />
+        ))}
       </Grid>
       <Heading
         variant="headline"
@@ -148,6 +127,11 @@ const Page = ({ repos }) => (
         Includes planning documents, partnership emails, meeting notes etc.
       </Text>
       <Grid columns={2} gap={3} mt={2} mb={[4]}>
+        <BankProject
+          name="Outernet"
+          url={`https://github.com/hackclub/outernet`}
+        />
+        <BankProject name="Epoch" url={`https://github.com/hackclub/epoch`} />
         <BankProject
           name="Assemble"
           url={`https://github.com/hackclub/assemble`}
@@ -167,7 +151,8 @@ const Page = ({ repos }) => (
       >
         Content
       </Heading>
-      <Grid columns={2} gap={3} mt={2} mb={[4]}>
+      <Grid columns={3} gap={3} mt={2} mb={[4]}>
+        <BankProject name="Jams" url={`https://github.com/hackclub/jams`} />
         <BankProject
           name="Workshops"
           url={`https://github.com/hackclub/hackclub/tree/main/workshops`}
@@ -260,5 +245,12 @@ export async function getStaticProps() {
   const repos = await octokit.paginate('GET /orgs/{org}/repos', {
     org: 'hackclub'
   })
-  return { props: { repos }, revalidate: 30 }
+
+  const transparentAccounts = (
+    await fetch('https://hcb.hackclub.com/api/v3/organizations').then(res =>
+      res.json()
+    )
+  ).filter(account => account.category?.replaceAll(' ', '_') === 'hack_club_hq')
+
+  return { props: { repos, transparentAccounts }, revalidate: 30 }
 }

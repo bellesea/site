@@ -1,21 +1,8 @@
 import CardModel from './card-model'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Badge,
-  Link,
-  Text
-} from 'theme-ui'
-import { useState, useEffect } from 'react'
+import { Box, Flex, Grid, Image, Link, Text } from 'theme-ui'
 import Buttons from './button'
-import ScrollingHackathons from '../../hackathons/scrolling-hackathons'
 import Dot from '../../dot'
+import { formatDate } from '../../../lib/dates'
 
 /** @jsxImportSource theme-ui */
 const Cover = () => (
@@ -27,7 +14,7 @@ const Cover = () => (
       left: 0,
       right: 0,
       backgroundImage:
-        'linear-gradient(to bottom,rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6))',
+        'linear-gradient(to bottom,rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6))',
       opacity: 0.8,
       zIndex: 1
     }}
@@ -35,34 +22,18 @@ const Cover = () => (
 )
 
 export default function Hackathons({ data, stars }) {
-  // let [count, setCount] = useState(0)
-  // useEffect(() => {
-  //   function add() {
-  //     if (count < data.length) {
-  //       setCount(count + 1)
-  //     } else {
-  //       setCount(0)
-  //     }
-  //   }
-
-  //     setInterval(add, 2000)
-  // }, [count])
   return (
     <CardModel
       color="white"
       sx={{
-        backgroundColor: 'dark' // background:
-        //   'linear-gradient(to bottom,rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.4) 25%,rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.6) 100%), url("https://hackclub.com/bank/bg.webp")',
-        // backgroundPositon: 'center center',
-        // backgroundSize: '100% auto'
+        backgroundColor: 'dark'
       }}
       stars={stars}
       github_link="https://github.com/hackclub/hackathons"
       highlight="blue"
-      // background="https://hackclub.com/bank/bg.webp"
     >
       <Image
-        src="/home/hackathons-bg.webp"
+        src="https://cloud-issl87d62-hack-club-bot.vercel.app/0bmc_1823.jpg"
         sx={{
           objectFit: 'cover',
           position: 'absolute',
@@ -72,13 +43,15 @@ export default function Hackathons({ data, stars }) {
           mt: -4,
           zIndex: 0
         }}
+        alt="A crowd of hackers cheering at Epoch"
       />
       <Cover />
       <Text
         variant="title"
+        as="h3"
         sx={{ fontSize: ['36px', 4, 5], position: 'relative', zIndex: 2 }}
       >
-        High school hackathons
+        High School Hackathons
       </Text>
       <Grid
         columns={[1, 1, 2]}
@@ -97,7 +70,7 @@ export default function Hackathons({ data, stars }) {
               link="https://hackathons.hackclub.com"
               primary="blue"
             >
-              Browse hackathons
+              Attend a hackathon
             </Buttons>
             <Buttons
               // content="learn more about available resources"
@@ -105,20 +78,9 @@ export default function Hackathons({ data, stars }) {
               icon="bolt"
               link="/hackathons"
             >
-              Organizer? Learn more
+              Organizer? Learn more.
             </Buttons>
           </Flex>
-          {/* <Button
-            variant="primary"
-            sx={{ bg: 'blue' }}
-            mt={3}
-            as="a"
-            href="https://editor.sprig.hackclub.com"
-            target="_blank"
-            rel="noopener"
-          >
-            Find a hackathon
-          </Button> */}
         </Box>
         <Flex
           sx={{
@@ -132,8 +94,11 @@ export default function Hackathons({ data, stars }) {
           }}
         >
           <Box sx={{ width: 'fit-content', float: 'right' }}>
-            <Text sx={{ fontSize: 'small', width: 'fit-content' }}>
-              Upcoming hackathons <Dot />
+            <Text
+              as="h4"
+              sx={{ fontSize: 'small', width: '100%', textAlign: 'center' }}
+            >
+              <Dot /> Upcoming Hackathons
             </Text>
             {data.slice(0, 5).map(data => (
               <Box
@@ -164,7 +129,8 @@ export default function Hackathons({ data, stars }) {
                       justifyContent: 'center',
                       borderRadius: 'circle',
                       height: ['20px', '25px', '30px'],
-                      width: ['20px', '25px', '30px']
+                      width: ['20px', '25px', '30px'],
+                      mr: '10px'
                     }}
                   >
                     <Image
@@ -180,13 +146,30 @@ export default function Hackathons({ data, stars }) {
                     />
                   </Box>
                 )}
-                <Link href={data.website}>
-                  {data.name} |{' '}
-                  {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(
-                    new Date(data.start).getMonth()
-                  )}{' '}
-                  {new Date(data.start).getUTCDate()}
-                </Link>
+                <Flex sx={{ flexDirection: 'column' }}>
+                  <Link
+                    href={data.website}
+                    as="a"
+                    target="_blank"
+                    sx={{
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {data.name}
+                  </Link>
+                  <Text
+                    as="h6"
+                    sx={{
+                      fontWeight: '400',
+                      fontSize: '0.8em',
+                      color: 'sunken'
+                    }}
+                  >
+                    {formatDate('mmmm d', new Date(data.start))}
+                  </Text>
+                </Flex>
               </Box>
             ))}
           </Box>
@@ -202,55 +185,61 @@ export default function Hackathons({ data, stars }) {
           display: ['block', 'block', 'none']
         }}
       >
-        <Text sx={{ fontSize: 'small' }}>Upcoming hackathon:</Text>
-        {data.slice(0, 1).map(data => (
-          <Box
-            sx={{
-              zIndex: '1',
-              // bg: 'rgb(255, 255, 255, 0.3)',
-              color: 'white',
-              textDecoration: 'none',
-              fontWeight: 'normal',
-              width: 'fit-content',
-              display: 'flex',
-              alignItems: 'center',
-              fontSize: 'small',
-              my: 2,
-              a: {
+        <Text sx={{ fontSize: 'small', color: 'white' }}>
+          Upcoming Hackathons:
+        </Text>
+        <Flex sx={{ gap: '10px' }}>
+          {data.slice(0, 2).map(data => (
+            <Box
+              sx={{
+                zIndex: '1',
+                // bg: 'rgb(255, 255, 255, 0.3)',
+                color: 'white',
                 textDecoration: 'none',
-                color: 'white'
-              }
-            }}
-            key={data.name}
-          >
-            {data.logo && (
-              <Box
-                sx={{
-                  backgroundImage: `linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.375) 75%), url('${data.banner}')`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 'circle',
-                  height: ['20px', '25px', '30px'],
-                  width: ['20px', '25px', '30px']
-                }}
-              >
-                <Image
-                  src={data.logo}
-                  alt={`${data.name} logo`}
-                  loading="lazy"
+                fontWeight: 'normal',
+                width: 'fit-content',
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: 'small',
+                my: 2,
+                a: {
+                  textDecoration: 'none',
+                  color: 'white'
+                }
+              }}
+              key={data.name}
+            >
+              {data.logo && (
+                <Box
                   sx={{
-                    height: '70%',
-                    width: '70%',
-                    objectFit: 'contain',
-                    borderRadius: 'default'
+                    backgroundImage: `linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.375) 75%), url('${data.banner}')`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 'circle',
+                    height: ['20px', '25px', '30px'],
+                    width: ['20px', '25px', '30px'],
+                    mr: '5px'
                   }}
-                />
-              </Box>
-            )}
-            <Link href={data.website}>{data.name}</Link>
-          </Box>
-        ))}
+                >
+                  <Image
+                    src={data.logo}
+                    alt={`${data.name} logo`}
+                    loading="lazy"
+                    sx={{
+                      height: '70%',
+                      width: '70%',
+                      objectFit: 'contain',
+                      borderRadius: 'default',
+                      fontSize: 'small'
+                    }}
+                  />
+                </Box>
+              )}
+              <Link href={data.website}>{data.name}</Link>
+            </Box>
+          ))}
+        </Flex>
       </Flex>
     </CardModel>
   )

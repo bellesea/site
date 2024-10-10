@@ -1,43 +1,62 @@
-export default async function github(req, res) {
-  let initialGitHubData = await fetch(
+import { normalizeGitHubCommitUrl } from '../../lib/helpers'
+
+const isRelevantEventType = type =>
+  ['PushEvent', 'PullRequestEvent', 'WatchEvent'].includes(type)
+
+const getMessage = (type, payload, repo) => {
+  switch (type) {
+    case 'PushEvent':
+      return payload.commits?.[0]?.message || 'No commit message'
+    case 'PullRequestEvent':
+      return payload.pull_request.title
+    case 'WatchEvent':
+      return `starred ${repo.name}`
+    default:
+      return null
+  }
+}
+
+const getUrl = (type, payload, repo) => {
+  switch (type) {
+    case 'PushEvent':
+      return payload.commits?.[0]?.url
+        ? normalizeGitHubCommitUrl(payload.commits[0].url)
+        : 'https://github.com/hackclub'
+    case 'PullRequestEvent':
+      return payload.pull_request.html_url
+    case 'WatchEvent':
+      return `https://github.com/${repo.name}`
+    default:
+      return `https://github.com/hackclub`
+  }
+}
+
+export async function fetchGitHub() {
+  try {
+
+  const initialGitHubData = await fetch(
     'https://api.github.com/orgs/hackclub/events'
   ).then(r => r.json())
 
-  let gitHubData = initialGitHubData.map(x => ({
-    type: x.type,
-    user:
-      x.type === 'PushEvent'
-        ? x.actor.login
-        : x.type === 'PullRequestEvent'
-        ? x.actor.login
-        : x.type === 'WatchEvent'
-        ? x.actor.login
-        : null,
-    userImage:
-      x.type === 'PushEvent'
-        ? x.actor.avatar_url
-        : x.type === 'PullRequestEvent'
-        ? x.actor.avatar_url
-        : x.type === 'WatchEvent'
-        ? x.actor.avatar_url
-        : null,
-    message:
-      x.type === 'PushEvent'
-        ? x.payload.commits[0].message
-        : x.type === 'PullRequestEvent'
-        ? x.payload.pull_request.title
-        : x.type === 'WatchEvent'
-        ? `starred ${x.repo.name}`
-        : null,
-    time: x.created_at
-  }))
+  const gitHubData = initialGitHubData
+    .filter(({ type }) => isRelevantEventType(type))
+    .map(({ type, actor, payload, repo, created_at }) => ({
+      type,
+      user: actor.login,
+      userImage: actor.avatar_url,
+      url: getUrl(type, payload, repo),
+      message: getMessage(type, payload, repo),
+      time: created_at
+    }))
 
-  gitHubData = gitHubData.filter(
-    x =>
-      x.type === 'PushEvent' ||
-      x.type === 'PullRequestEvent' ||
-      x.type === 'WatchEvent'
-  )
+  return gitHubData
+  } catch (error) {
+    console.error(error)
+    return []
+  }
+}
 
-  res.json(gitHubData)
+export default async function github(req, res) {
+  const git = await fetchGitHub(req, res)
+  res.json(git)
 }

@@ -1,10 +1,18 @@
-export default async function getGames(req, res) {
-  let games = await fetch(
-    'https://editor.sprig.hackclub.com/metadata.json'
-  ).then(res => res.json())
-  games = games
-    .sort((a, b) => new Date(b.addedOn) - new Date(a.addedOn))
-    .slice(0, 4)
+export async function getGames() {
+  try {
 
-  return res.json(games)
+  let games = await fetch(
+    'https://sprig.hackclub.com/api/gallery?new'
+  ).then(res => res.json())
+
+  return games
+  } catch(e) {
+    console.error(e)
+    return []
+  }
+}
+
+export default async function Games(req, res) {
+  const games = await getGames()
+  res.json(games)
 }
